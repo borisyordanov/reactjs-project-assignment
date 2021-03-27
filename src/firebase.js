@@ -5,5 +5,5 @@ const firebaseConfig = {
   projectId: 'cook-uni-c0938',
   storageBucket: 'cook-uni-c0938.appspot.com',
   messagingSenderId: '917398348811',
-  appId: '1:917398348811:web:b7afdcd7ba6e4e70d3930e',
+  appId: '1:917398348811:web:6b224d9686f70d15d3930e',
 };
