@@ -1,22 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from './pages/Home';
-import About from './pages/About';
-import SingleRecipe from './pages/SingleRecipe';
-import Error from './pages/Error';
-import Register from './pages/Register';
-import Login from './pages/Login';
+// import Home from './pages/Home';
+// import About from './pages/About';
+// import SingleRecipe from './pages/SingleRecipe';
+// import Error from './pages/Error';
+// import Register from './pages/Register';
+// import Login from './pages/Login';
 
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
+import Loading from './components/Loading';
 
 function App() {
   return (
     <div>
       <Router>
-        <Navbar />
+        <Loading />
+        {/* <Navbar /> */}
         <Switch>
-          <Route exact path="/">
+          {/* <Route exact path="/">
             <Home />
           </Route>
           <Route path="/about">
@@ -33,7 +35,7 @@ function App() {
           </Route>
           <Route path="*">
             <Error />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </div>
