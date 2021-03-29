@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function Navbar() {
   return (
     // <nav classNameName="navbar">
@@ -38,23 +38,46 @@ function Navbar() {
     //   </div>
     // </div>
 
-    <div className="topnav">
-      <NavLink to="/">
-        <img
-          className="logo"
-          src="http://cdn.onlinewebfonts.com/svg/img_415179.png"
-          alt="Cookbook"
-        />
-      </NavLink>
-      <div className="links-nav">
-        <NavLink className="link" to="/login">
-          Login
-        </NavLink>
-        <NavLink className="link" to="register">
-          Register
-        </NavLink>
+    // <div className="topnav">
+    //   <NavLink to="/">
+    //     <img
+    //       className="logo"
+    //       src="http://cdn.onlinewebfonts.com/svg/img_415179.png"
+    //       alt="Cookbook"
+    //     />
+    //   </NavLink>
+    //   <div className="links-nav">
+    //     <NavLink className="link" to="/login">
+    //       Login
+    //     </NavLink>
+    //     <NavLink className="link" to="register">
+    //       Register
+    //     </NavLink>
+    //   </div>
+    // </div>
+
+    <nav className="navbar">
+      <div className="nav-center">
+        <Link to="/">
+          <img
+            src="http://cdn.onlinewebfonts.com/svg/img_415179.png"
+            alt="The Cook Book"
+            className="logo"
+          />
+        </Link>
+        <ul className="nav-links">
+          <li>
+            <Link to="/">home</Link>
+          </li>
+          <li>
+            <Link to="/login">login</Link>
+          </li>
+          <li>
+            <Link to="/register">register</Link>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
   );
 }
 
