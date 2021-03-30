@@ -15,7 +15,10 @@ function Login() {
         console.log(auth);
         history.push('/');
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        setPassword('');
+        alert(error.message);
+      });
   };
 
   return (
