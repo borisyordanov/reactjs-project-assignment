@@ -9,7 +9,10 @@ function Home() {
       <div id="sharedRecipes">{/*  Recipe.js.map */}</div>
       {/* if NO recipes */}
       <div id="foodNotFound">
-        <img src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg" />
+        <img
+          src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg"
+          alt="No Recipes"
+        />
         <h3>Food not found...</h3>
       </div>
 
