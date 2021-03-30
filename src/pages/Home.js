@@ -12,10 +12,10 @@ function Home() {
       </div>
 
       <main role="main" className="inner cover mt-5">
-        <h1 className="cover-heading">Coooooking University</h1>
+        <h1 className="cover-heading">The Cook Book</h1>
         <p className="lead">
           They say that food passes through the stomach, we say that food passes
-          through CookUni...
+          through The Cook Book...
         </p>
       </main>
     </>
