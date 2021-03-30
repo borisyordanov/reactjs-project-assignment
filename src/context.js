@@ -1,16 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useCallback } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 
-const AppContext = React.createContext();
+export const StateContext = createContext();
 
-const AppProvider = ({ children }) => {
-  return (
-    <AppContext.Provider value="hello world">{children}</AppContext.Provider>
-  );
-};
-// make sure use
-export const useGlobalContext = () => {
-  return useContext(AppContext);
-};
+export const StateProvider = ({ reducer, initialState, children }) => (
+  <StateContext.Provider value={useReducer(reducer, initialState)}>
+    {children}
+  </StateContext.Provider>
+);
 
-export { AppContext, AppProvider };
+export const useStateValue = () => useContext(StateContext);
