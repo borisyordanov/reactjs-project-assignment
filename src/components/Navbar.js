@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useStateValue } from '../context';
 import { auth } from '../firebase';
 
 function Navbar() {
-  const history = useHistory();
   const [{ user, recipes }] = useStateValue();
 
   const logout = () => {
     if (user) {
       auth.signOut();
-      history.push('/');
     }
   };
 
@@ -21,7 +19,7 @@ function Navbar() {
           <Link className="nav-link" to="/recipe/create">
             Share recipe
           </Link>
-          <Link className="nav-link" onClick={logout}>
+          <Link className="nav-link" to="/" onClick={logout}>
             Logout
           </Link>
         </>
