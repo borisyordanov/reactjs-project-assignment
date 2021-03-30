@@ -41,7 +41,7 @@ function Navbar() {
   return (
     <header className="masthead mb-auto">
       <div className="inner">
-        <h3 className="masthead-brand">CookUni</h3>
+        <h3 className="masthead-brand">The Cook Book</h3>
         <nav className="nav nav-masthead justify-content-center">
           <Link className="nav-link" to="/">
             Home
