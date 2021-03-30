@@ -12,7 +12,7 @@ function Navbar() {
           <Link className="nav-link" to="/">
             Welcome, user!
           </Link>
-          <Link className="nav-link" to="/create">
+          <Link className="nav-link" to="/recipe/create">
             Share recipe
           </Link>
           <Link className="nav-link" to="/logout">

@@ -3,14 +3,17 @@ import React from 'react';
 function Home() {
   return (
     <>
+      {/* if user */}
       <h1 className="text-center">Our Recipes</h1>
-
-      <div id="sharedRecipes"></div>
+      {/* If recipes */}
+      <div id="sharedRecipes">{/*  Recipe.js.map */}</div>
+      {/* if NO recipes */}
       <div id="foodNotFound">
         <img src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg" />
         <h3>Food not found...</h3>
       </div>
 
+      {/* if NO user */}
       <main role="main" className="inner cover mt-5">
         <h1 className="cover-heading">The Cook Book</h1>
         <p className="lead">
