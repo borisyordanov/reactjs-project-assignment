@@ -1,5 +1,7 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { auth } from './firebase';
+import { useStateValue } from './context';
 
 import Home from './pages/Home';
 import SingleRecipe from './pages/SingleRecipe';
@@ -12,31 +14,53 @@ import Footer from './components/Footer';
 import CreateRecipe from './pages/CreateRecipe';
 
 function App() {
+  const [{ user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        //user is logged in
+        dispatch({
+          type: 'SET_USER',
+          user: authUser,
+        });
+      } else {
+        //user is logged out
+        dispatch({
+          type: 'SET_USER',
+          user: null,
+        });
+      }
+    });
+  }, []);
+
   return (
-    <div>
-      <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/recipe/create">
-          <CreateRecipe />
-        </Route>
-        <Route exact path="/recipe/details/:id">
-          <SingleRecipe />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/recipe/create">
+            <CreateRecipe />
+          </Route>
+          <Route exact path="/recipe/details/:id">
+            <SingleRecipe />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 

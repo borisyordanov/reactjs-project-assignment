@@ -1,6 +1,9 @@
 import React from 'react';
+import { useStateValue } from '../context';
 
 function Home() {
+  const [{ user }] = useStateValue();
+
   return (
     <>
       {/* if user */}
