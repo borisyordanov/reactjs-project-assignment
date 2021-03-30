@@ -266,6 +266,11 @@ form textarea {
 .ingredient {
   text-align: center;
 }
+.errorImg {
+  vertical-align: middle;
+  width: 400px;
+  margin-left: 20px;
+}
 
 #successBox,
 #loadingBox,
