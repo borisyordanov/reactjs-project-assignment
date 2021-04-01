@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Recipe from '../components/Recipe';
-import { useGlobalContext } from '../context';
+import { db } from '../firebase';
 
 function Home() {
-  const { recipes } = useGlobalContext();
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await db.collection('recipes').get();
+      console.log(data.docs);
+      setRecipes(
+        data.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        })
+      );
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <h1 className="text-center">Our Recipes</h1>

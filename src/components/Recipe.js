@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Recipe({ meal, ingredients, foodImageURL, category }) {
+function Recipe({ id, meal, ingredients, foodImageURL, category }) {
   function getCategoryImageUrl(category) {
     const result = {
       'Vegetables and legumes/beans':
@@ -19,28 +19,28 @@ function Recipe({ meal, ingredients, foodImageURL, category }) {
   }
 
   return (
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="our-team-main">
-            <div class="team-front">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <div className="our-team-main">
+            <div className="team-front">
               <img src={getCategoryImageUrl(category)} />
               <h3>{meal}</h3>
               <p>{category}</p>
             </div>
 
-            <div class="team-back">
-              <div class="back-side-info">
+            <div className="team-back">
+              <div className="back-side-info">
                 <h4>Ingredients</h4>
                 <ul>
-                  {ingredients.map((item) => {
-                    return <li>{item}</li>;
+                  {ingredients.map((item, index) => {
+                    return <li key={index}>{item}</li>; //TO FIX KEY
                   })}
                 </ul>
-                <Link to="/recipe/details/:id">View the recipe</Link>
+                <Link to={`/recipe/details/${id}`}>View the recipe</Link>
               </div>
 
-              <img class="foodImage" src={foodImageURL} />
+              <img className="foodImage" src={foodImageURL} />
             </div>
           </div>
         </div>
