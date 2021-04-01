@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { auth } from './firebase';
-import { useStateValue } from './context';
 
 import Home from './pages/Home';
 import SingleRecipeDetails from './pages/SingleRecipeDetails';
@@ -14,26 +12,6 @@ import Footer from './components/Footer';
 import CreateRecipe from './pages/CreateRecipe';
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        //user is logged in
-        dispatch({
-          type: 'SET_USER',
-          user: authUser,
-        });
-      } else {
-        //user is logged out
-        dispatch({
-          type: 'SET_USER',
-          user: null,
-        });
-      }
-    });
-  }, []);
-
   return (
     <BrowserRouter>
       <div>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useGlobalContext } from '../context';
 import { db } from '../firebase';
 
 function CreateRecipe() {
   const history = useHistory();
+  const { user } = useGlobalContext();
 
   const createMeal = (
     meal,
@@ -11,7 +13,8 @@ function CreateRecipe() {
     prepMethod,
     description,
     foodImageURL,
-    category
+    category,
+    owner
   ) => {
     let ingredientsArray = [...ingredients.split(',')];
     return db.collection('recipes').add({
@@ -21,6 +24,7 @@ function CreateRecipe() {
       description,
       foodImageURL,
       category,
+      owner,
     });
   };
 
@@ -35,14 +39,15 @@ function CreateRecipe() {
       foodImageURL,
       category,
     } = e.target;
-
+    console.log(user);
     createMeal(
       meal.value,
       ingredients.value,
       prepMethod.value,
       description.value,
       foodImageURL.value,
-      category.value
+      category.value,
+      user.uid
     )
       .then((res) => history.push('/'))
       .catch((err) => console.log(err));

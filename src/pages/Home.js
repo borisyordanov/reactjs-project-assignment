@@ -1,13 +1,18 @@
 import React from 'react';
-import { useStateValue } from '../context';
+import Recipe from '../components/Recipe';
+import { useGlobalContext } from '../context';
 
 function Home() {
-  const [{ recipes }] = useStateValue();
+  const { recipes } = useGlobalContext();
   return (
     <>
       <h1 className="text-center">Our Recipes</h1>
       {recipes.length > 0 ? (
-        <div id="sharedRecipes">{/*  Recipe.js.map */}</div>
+        <div id="sharedRecipes">
+          {recipes.map((recipe) => {
+            return <Recipe key={recipe.id} {...recipe} />;
+          })}
+        </div>
       ) : (
         <div id="foodNotFound">
           <img

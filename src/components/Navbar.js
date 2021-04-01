@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useStateValue } from '../context';
+import { useGlobalContext } from '../context';
 import { auth } from '../firebase';
 
 function Navbar() {
-  const [{ user, recipes }] = useStateValue();
+  const { user } = useGlobalContext();
 
   const logout = () => {
     if (user) {
