@@ -1,9 +1,60 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+import { db } from '../firebase';
 
 function CreateRecipe() {
+  const history = useHistory();
+
+  const createMeal = (
+    meal,
+    ingredients,
+    prepMethod,
+    description,
+    foodImageURL,
+    category
+  ) => {
+    let ingredientsArray = [...ingredients.split(',')];
+    return db.collection('recipes').add({
+      meal,
+      ingredients: ingredientsArray,
+      prepMethod,
+      description,
+      foodImageURL,
+      category,
+    });
+  };
+
+  const onCreateRecipeSubmit = (e) => {
+    e.preventDefault();
+    // console.log(e.target);
+    const {
+      meal,
+      ingredients,
+      prepMethod,
+      description,
+      foodImageURL,
+      category,
+    } = e.target;
+
+    createMeal(
+      meal.value,
+      ingredients.value,
+      prepMethod.value,
+      description.value,
+      foodImageURL.value,
+      category.value
+    )
+      .then((res) => history.push('/'))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
-      <form className="text-center p-5 form-layout" id="share-receipt-form">
+      <form
+        className="text-center p-5 form-layout"
+        id="share-receipt-form"
+        onSubmit={onCreateRecipeSubmit}
+      >
         <p className="h4 mb-4">Share Recipe</p>
 
         <input
@@ -47,12 +98,16 @@ function CreateRecipe() {
         />
 
         <select name="category">
-          <option selected>Select category...</option>
-          <option selected>Vegetables and legumes/beans</option>
-          <option selected>Fruits</option>
-          <option selected>Grain Food</option>
-          <option selected>Milk, cheese, eggs and alternatives</option>
-          <option selected>
+          {/* <option value="Select category...">Select category...</option> */}
+          <option value="Vegetables and legumes/beans">
+            Vegetables and legumes/beans
+          </option>
+          <option value="Fruits">Fruits</option>
+          <option value="Grain Food">Grain Food</option>
+          <option value="Milk, cheese, eggs and alternatives">
+            Milk, cheese, eggs and alternatives
+          </option>
+          <option value="Lean meats and poultry, fish and alternatives">
             Lean meats and poultry, fish and alternatives
           </option>
         </select>
