@@ -4,7 +4,7 @@ import { auth } from './firebase';
 import { useStateValue } from './context';
 
 import Home from './pages/Home';
-import SingleRecipe from './pages/SingleRecipe';
+import SingleRecipeDetails from './pages/SingleRecipeDetails';
 import Error from './pages/Error';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -46,7 +46,7 @@ function App() {
             <CreateRecipe />
           </Route>
           <Route exact path="/recipe/details/:id">
-            <SingleRecipe />
+            <SingleRecipeDetails />
           </Route>
           <Route path="/register">
             <Register />
