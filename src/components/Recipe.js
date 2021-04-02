@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../context';
 
 function Recipe({ id, meal, ingredients, foodImageURL, category }) {
+  const { user } = useGlobalContext();
+
   function getCategoryImageUrl(category) {
     const result = {
       'Vegetables and legumes/beans':
@@ -37,7 +40,11 @@ function Recipe({ id, meal, ingredients, foodImageURL, category }) {
                     return <li key={index}>{item}</li>; //TO FIX KEY
                   })}
                 </ul>
-                <Link to={`/recipe/details/${id}`}>View the recipe</Link>
+                {user ? (
+                  <Link to={`/recipe/details/${id}`}>View the recipe</Link>
+                ) : (
+                  <Link to={`/login`}>Login to see the details</Link>
+                )}
               </div>
 
               <img className="foodImage" src={foodImageURL} alt={meal} />
