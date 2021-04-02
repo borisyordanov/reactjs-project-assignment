@@ -19,7 +19,7 @@ function EditRecipe() {
     getOne(id)
       .then((res) => setRecipe({ ...res.data() }))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   const onEditRecipeSubmit = (e) => {
     e.preventDefault();
