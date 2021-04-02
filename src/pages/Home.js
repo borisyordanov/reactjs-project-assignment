@@ -8,7 +8,6 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await db.collection('recipes').get();
-      console.log(data.docs);
       setRecipes(
         data.docs.map((doc) => {
           return {

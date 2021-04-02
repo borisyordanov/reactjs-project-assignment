@@ -24,7 +24,7 @@ function Recipe({ id, meal, ingredients, foodImageURL, category }) {
         <div className="col-lg-12">
           <div className="our-team-main">
             <div className="team-front">
-              <img src={getCategoryImageUrl(category)} />
+              <img src={getCategoryImageUrl(category)} alt={category} />
               <h3>{meal}</h3>
               <p>{category}</p>
             </div>
@@ -40,7 +40,7 @@ function Recipe({ id, meal, ingredients, foodImageURL, category }) {
                 <Link to={`/recipe/details/${id}`}>View the recipe</Link>
               </div>
 
-              <img className="foodImage" src={foodImageURL} />
+              <img className="foodImage" src={foodImageURL} alt={meal} />
             </div>
           </div>
         </div>
