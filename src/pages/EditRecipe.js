@@ -54,7 +54,6 @@ function EditRecipe() {
         />
 
         <select name="category" select="">
-          <option selected>Select category...</option>
           <option>Vegetables and legumes/beans</option>
           <option>Fruits</option>
           <option>Grain Food</option>
