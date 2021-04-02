@@ -4,28 +4,30 @@ import { getAllRecipes } from "../services/get-all-recipes";
 export const useGetRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!recipes.length) {
-      const fetchRecipes = async () => {
-        setLoading(true);
+    const fetchRecipes = async () => {
+      setLoading(true);
 
-        const data = await getAllRecipes();
+      try {
+        const { docs: recipes } = await getAllRecipes();
 
         setLoading(false);
 
         setRecipes(
-          data.docs.map((doc) => {
-            return {
-              id: doc.id,
-              ...doc.data(),
-            };
-          })
+          recipes.map((recipe) => ({
+            id: recipe.id,
+            ...recipe.data(),
+          }))
         );
-      };
-      fetchRecipes();
-    }
-  }, [recipes]);
+      } catch (error) {
+        setLoading(false);
+        setError("Unable to load recipes");
+      }
+    };
+    fetchRecipes();
+  }, []);
 
-  return [loading, recipes];
+  return [loading, error, recipes];
 };

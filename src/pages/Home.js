@@ -3,12 +3,18 @@ import RecipeList from "../components/RecipeList";
 import { useGetRecipes } from "../data/use-get-recipes";
 
 function Home() {
-  const [loading, recipes] = useGetRecipes();
+  const [loading, error, recipes] = useGetRecipes();
+
+  if (error) {
+    <p className="text-center">{error}</p>;
+  }
 
   return (
     <>
       <h1 className="text-center">Our Recipes</h1>
+
       {loading ? "Loading" : <RecipeList recipes={recipes} />}
+
       <main role="main" className="inner cover mt-5">
         <h1 className="cover-heading">The Cook Book</h1>
         <p className="lead">
