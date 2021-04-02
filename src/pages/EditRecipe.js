@@ -3,12 +3,7 @@ import React from 'react';
 function EditRecipe() {
   return (
     <>
-      <form
-        className="text-center p-5 form-layout"
-        action="/edit/{{recipe.id}}"
-        method="POST"
-        id="edit-receipt-form"
-      >
+      <form className="text-center p-5 form-layout" id="edit-receipt-form">
         <p className="h4 mb-4">Edit Recipe</p>
 
         <input
