@@ -12,6 +12,7 @@ function Navbar() {
     }
   };
 
+  //Да изнеса в отделен компонент
   const returnUserInfo = (user) => {
     if (user !== null) {
       return (

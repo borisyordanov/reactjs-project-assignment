@@ -1,13 +1,13 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCdoesCw2Y1wTz1CfR2RzYWM806tDodALY',
-  authDomain: 'cook-uni-c0938.firebaseapp.com',
-  databaseURL: 'https://cook-uni-c0938-default-rtdb.firebaseio.com',
-  projectId: 'cook-uni-c0938',
-  storageBucket: 'cook-uni-c0938.appspot.com',
-  messagingSenderId: '917398348811',
-  appId: '1:917398348811:web:6b224d9686f70d15d3930e',
+  apiKey: 'AIzaSyBCBBVESpThGylWUgFiYoLTEZsmiQNa9JI',
+  authDomain: 'exam-softuni-7b0c1.firebaseapp.com',
+  databaseURL: 'https://exam-softuni-7b0c1-default-rtdb.firebaseio.com',
+  projectId: 'exam-softuni-7b0c1',
+  storageBucket: 'exam-softuni-7b0c1.appspot.com',
+  messagingSenderId: '366356048515',
+  appId: '1:366356048515:web:4e8b9e955e32e5448bc9b6',
 };
 
 firebase.initializeApp(firebaseConfig);

@@ -5,9 +5,10 @@ import { useGlobalContext } from '../context';
 import { db } from '../firebase';
 
 function SingleRecipeDetails() {
-  let { id } = useParams();
+  const { id } = useParams();
   const { user } = useGlobalContext();
-  let [recipe, setRecipe] = useState({});
+  // const [recipe, setRecipe] = useState(null);
+  const [recipe, setRecipe] = useState({});
 
   const getOne = (id) => {
     return db.collection('recipes').doc(id).get();
@@ -30,6 +31,8 @@ function SingleRecipeDetails() {
       .catch((err) => console.log(err));
   }, [id]);
 
+  //това може да се рендърваме в App.js и от там да подаваме като пропс
+
   const {
     meal,
     ingredients,
@@ -41,7 +44,7 @@ function SingleRecipeDetails() {
   } = recipe;
 
   const onRecipeLikeButtonClickHandler = () => {
-    let incrementedLikes = Number(likesCounter) + 1;
+    const incrementedLikes = Number(likesCounter) + 1;
     likeOne(id, incrementedLikes).then(() => {
       setRecipe((oldState) => ({
         ...oldState,
@@ -52,7 +55,9 @@ function SingleRecipeDetails() {
 
   const onRecipeDeleteButtonClickHandler = () => {
     deleteOne(id)
-      .then()
+      .then(() => {
+        setRecipe(null);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -84,6 +89,7 @@ function SingleRecipeDetails() {
                 </Link>
               </>
             ) : (
+              // отделен компонент
               <Link
                 className="btn btn-success"
                 to={`/recipe/details/${id}`}

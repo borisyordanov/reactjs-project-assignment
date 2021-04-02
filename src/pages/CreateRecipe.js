@@ -15,7 +15,7 @@ function CreateRecipe() {
     foodImageURL,
     category
   ) => {
-    let ingredientsArray = [...ingredients.split(',')];
+    const ingredientsArray = ingredients.split(',');
 
     if (meal.length < 4) {
       console.log('Meal name should be at least 4 characters long.');
