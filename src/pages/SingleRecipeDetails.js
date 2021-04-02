@@ -13,11 +13,15 @@ function SingleRecipeDetails() {
     return db.collection('recipes').doc(id).get();
   };
 
-  const like = (recipeId, likes) => {
+  const likeOne = (recipeId, likes) => {
     return db
       .collection('recipes')
       .doc(recipeId)
       .update({ likesCounter: likes });
+  };
+
+  const deleteOne = (id) => {
+    return db.collection('recipes').doc(id).delete();
   };
 
   useEffect(() => {
@@ -32,19 +36,24 @@ function SingleRecipeDetails() {
     prepMethod,
     description,
     foodImageURL,
-    category,
     owner,
     likesCounter,
   } = recipe;
 
-  const onRecipeButtonClickHandler = () => {
+  const onRecipeLikeButtonClickHandler = () => {
     let incrementedLikes = Number(likesCounter) + 1;
-    like(id, incrementedLikes).then(() => {
+    likeOne(id, incrementedLikes).then(() => {
       setRecipe((oldState) => ({
         ...oldState,
         likesCounter: incrementedLikes,
       }));
     });
+  };
+
+  const onRecipeDeleteButtonClickHandler = () => {
+    deleteOne(id)
+      .then()
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -63,10 +72,14 @@ function SingleRecipeDetails() {
           <div className="actions">
             {owner === user?.uid ? (
               <>
-                <Link className="btn btn-danger" to="/recipe/delete/:id">
+                <Link
+                  className="btn btn-danger"
+                  to="/"
+                  onClick={onRecipeDeleteButtonClickHandler}
+                >
                   Archive
                 </Link>
-                <Link className="btn btn-info" to="/recipe/edit/:id">
+                <Link className="btn btn-info" to={`/recipe/edit/${id}`}>
                   Edit
                 </Link>
               </>
@@ -74,7 +87,7 @@ function SingleRecipeDetails() {
               <Link
                 className="btn btn-success"
                 to={`/recipe/details/${id}`}
-                onClick={onRecipeButtonClickHandler}
+                onClick={onRecipeLikeButtonClickHandler}
               >
                 {likesCounter} likes
               </Link>

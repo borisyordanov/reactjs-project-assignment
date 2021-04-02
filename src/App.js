@@ -6,6 +6,7 @@ import SingleRecipeDetails from './pages/SingleRecipeDetails';
 import Error from './pages/Error';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import EditRecipe from './pages/EditRecipe';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/recipe/details/:id">
             <SingleRecipeDetails />
+          </Route>
+          <Route exact path="/recipe/edit/:id">
+            <EditRecipe />
           </Route>
           <Route path="/register">
             <Register />
