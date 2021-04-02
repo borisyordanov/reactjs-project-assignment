@@ -11,16 +11,11 @@ export const useGetRecipes = () => {
       setLoading(true);
 
       try {
-        const { docs: recipes } = await getAllRecipes();
+        const recipes = await getAllRecipes();
 
         setLoading(false);
 
-        setRecipes(
-          recipes.map((recipe) => ({
-            id: recipe.id,
-            ...recipe.data(),
-          }))
-        );
+        setRecipes(recipes);
       } catch (error) {
         setLoading(false);
         setError("Unable to load recipes");
