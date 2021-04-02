@@ -18,7 +18,7 @@ function Home() {
       );
     };
     fetchData();
-  }, []);
+  }, [recipes]);
 
   return (
     <>

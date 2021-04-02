@@ -1,9 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { db } from '../firebase';
 
 function EditRecipe() {
+  const [recipe, setRecipe] = useState({});
+  let { id } = useParams();
+  const history = useHistory();
+
+  const getOne = (id) => {
+    return db.collection('recipes').doc(id).get();
+  };
+
+  const updateOne = (recipeId, data) => {
+    return db.collection('recipes').doc(recipeId).update(data);
+  };
+
+  useEffect(() => {
+    getOne(id)
+      .then((res) => setRecipe({ ...res.data() }))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const onEditRecipeSubmit = (e) => {
+    e.preventDefault();
+    let ingredientsArray = [...e.target.ingredients.value.split(',')];
+    const { meal, prepMethod, description, foodImageURL, category } = e.target;
+    let updatedRecipe = {
+      ...recipe,
+      meal: meal.value,
+      ingredients: ingredientsArray,
+      prepMethod: prepMethod.value,
+      description: description.value,
+      foodImageURL: foodImageURL.value,
+      category: category.value,
+    };
+
+    updateOne(id, updatedRecipe)
+      .then((res) => history.push('/'))
+      .catch((err) => console.log(err));
+  };
   return (
     <>
-      <form className="text-center p-5 form-layout" id="edit-receipt-form">
+      <form
+        className="text-center p-5 form-layout"
+        id="edit-receipt-form"
+        onSubmit={onEditRecipeSubmit}
+      >
         <p className="h4 mb-4">Edit Recipe</p>
 
         <input
@@ -12,7 +54,7 @@ function EditRecipe() {
           name="meal"
           className="form-control mb-4"
           placeholder="Meal"
-          value="{{recipe.meal}}"
+          defaultValue={recipe.meal}
         />
 
         <input
@@ -21,7 +63,7 @@ function EditRecipe() {
           name="ingredients"
           className="form-control mb-4"
           placeholder="Ingredients"
-          value="{{recipe.ingredients}}"
+          defaultValue={recipe.ingredients}
         />
 
         <textarea
@@ -30,9 +72,8 @@ function EditRecipe() {
           name="prepMethod"
           className="form-control mb-4"
           placeholder="Method of preparation"
-        >
-          prepMethod
-        </textarea>
+          defaultValue={recipe.prepMethod}
+        ></textarea>
 
         <textarea
           type="text"
@@ -40,9 +81,8 @@ function EditRecipe() {
           name="description"
           className="form-control mb-4"
           placeholder="Description"
-        >
-          description
-        </textarea>
+          defaultValue={recipe.description}
+        ></textarea>
 
         <input
           type="text"
@@ -50,20 +90,17 @@ function EditRecipe() {
           name="foodImageURL"
           className="form-control mb-4"
           placeholder="Food Image URL..."
-          value="{{recipe.foodImageURL}}"
+          defaultValue={recipe.foodImageURL}
         />
 
-        <select name="category" select="">
+        <select name="category" select="" value={recipe.category}>
           <option>Vegetables and legumes/beans</option>
           <option>Fruits</option>
           <option>Grain Food</option>
           <option>Milk, cheese, eggs and alternatives</option>
           <option>Lean meats and poultry, fish and alternatives</option>
         </select>
-        <button
-          className="btn btn-danger w-25 m-auto my-4 btn-block"
-          type="submit"
-        >
+        <button className="btn btn-danger w-25 m-auto my-4 btn-block">
           Edit it
         </button>
       </form>
