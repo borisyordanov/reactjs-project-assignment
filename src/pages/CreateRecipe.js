@@ -13,10 +13,37 @@ function CreateRecipe() {
     prepMethod,
     description,
     foodImageURL,
-    category,
-    owner
+    category
   ) => {
     let ingredientsArray = [...ingredients.split(',')];
+
+    if (meal.length < 4) {
+      console.log('Meal name should be at least 4 characters long.');
+      return;
+    }
+
+    if (ingredientsArray.length < 2) {
+      console.log('There should be at least two ingredients.');
+      return;
+    }
+
+    if (prepMethod.length < 10 || description.length < 10) {
+      console.log(
+        'Preparation method and description should be at least 10 characters long.'
+      );
+      return;
+    }
+
+    if (!foodImageURL.startsWith('http')) {
+      console.log('foodImageURL must start with http:// or https:// .');
+      return;
+    }
+
+    if (!foodImageURL.startsWith('https')) {
+      console.log('foodImageURL must start with http:// or https:// .');
+      return;
+    }
+
     return db.collection('recipes').add({
       meal,
       ingredients: ingredientsArray,
@@ -24,13 +51,13 @@ function CreateRecipe() {
       description,
       foodImageURL,
       category,
-      owner,
+      owner: user.uid,
+      likesCounter: 0,
     });
   };
 
   const onCreateRecipeSubmit = (e) => {
     e.preventDefault();
-    // console.log(e.target);
     const {
       meal,
       ingredients,
@@ -39,15 +66,14 @@ function CreateRecipe() {
       foodImageURL,
       category,
     } = e.target;
-    console.log(user);
+
     createMeal(
       meal.value,
       ingredients.value,
       prepMethod.value,
       description.value,
       foodImageURL.value,
-      category.value,
-      user.uid
+      category.value
     )
       .then((res) => history.push('/'))
       .catch((err) => console.log(err));
@@ -103,7 +129,6 @@ function CreateRecipe() {
         />
 
         <select name="category">
-          {/* <option value="Select category...">Select category...</option> */}
           <option value="Vegetables and legumes/beans">
             Vegetables and legumes/beans
           </option>
