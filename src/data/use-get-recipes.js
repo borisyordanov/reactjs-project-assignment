@@ -8,13 +8,11 @@ export const useGetRecipes = () => {
 
   useEffect(() => {
     const fetchRecipes = async () => {
-      setLoading(true);
-
       try {
+        setLoading(true);
         const recipes = await getAllRecipes();
 
         setLoading(false);
-
         setRecipes(recipes);
       } catch (error) {
         setLoading(false);

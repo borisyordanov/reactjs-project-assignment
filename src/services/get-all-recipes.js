@@ -4,7 +4,7 @@ export const getAllRecipes = () => {
   try {
     const { docs } = db.collection("recipes").get();
 
-    if (!docs) {
+    if (!docs || docs.length === 0) {
       return [];
     }
 
