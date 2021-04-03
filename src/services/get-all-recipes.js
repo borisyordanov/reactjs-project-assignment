@@ -1,8 +1,8 @@
 import { db } from "../firebase";
 
-export const getAllRecipes = () => {
+export const getAllRecipes = async () => {
   try {
-    const { docs } = db.collection("recipes").get();
+    const { docs } = await db.collection("recipes").get();
 
     if (!docs || docs.length === 0) {
       return [];
@@ -13,6 +13,6 @@ export const getAllRecipes = () => {
       ...recipe.data(),
     }));
   } catch (error) {
-    return;
+    return error;
   }
 };
